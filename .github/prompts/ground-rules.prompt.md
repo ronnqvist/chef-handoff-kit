@@ -1,0 +1,7 @@
+Title: Ground Rules (Convex/Chef)
+Goal: Summarise applicable coding constraints before edits.
+Steps:
+- Read `./.cursorrules` and `./.github/instructions/convex.instructions.md` if present.
+- Output a concise checklist (≤20 bullets) relevant to the files being edited.
+- Ask for confirmation before proposing or applying any changes.
+Output: bullet checklist + confirmation question.
