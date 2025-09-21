@@ -31,9 +31,11 @@ Chef exports include detailed guidelines for working with Convex. Keep these fil
 
 ## Next steps (when ready)
 
-These actions are **not** part of the hand‑off, but you can perform them later using Copilot Chat and the provided prompt files:
+After confirming the app runs locally, use Copilot Chat to automate the rest of your workflow.  The following **slash prompts** live in `.github/prompts/` and can be executed directly in Copilot Chat (Agent mode):
 
-- `/ground-rules` – summarise applicable constraints from `.cursorrules` before making edits.
-- `/init-github` – create a new GitHub repository and push the current project.
-- `/add-build-script` – add a production build script (`"build": "vite build"`) to `package.json`.
-- `/vercel-setup` – set up a Vercel project, configure the build command and environment variables, and trigger the first deploy.
+- **`/ground-rules`** – read `.cursorrules` and Convex instructions and summarise the applicable guidelines before you make changes. Run this once per session to refresh your understanding.
+- **`/init-github`** – create a new repository under your GitHub account (using the GitHub MCP tools), initialise git locally if needed, commit all files, add a remote, and push. The prompt will ask for your owner and repo name.
+- **`/add-build-script`** – *(optional)* add a `build` script to `package.json` (`"build": "vite build"`) if one doesn’t already exist. Chef projects often ship without a build script【379763478983828†L163-L169】; run this prompt only if it’s missing.
+- **`/vercel-setup`** – configure Vercel for deployment using Convex’s first‑class integration. The prompt will detect whether a build script exists and choose the appropriate build command (`npx convex deploy --cmd 'npm run build'` or `npx convex deploy --cmd 'vite build'`), set the `CONVEX_DEPLOY_KEY` environment variable (you’ll paste it), and trigger the first deploy.
+
+These prompts guide Copilot through multi‑step tasks safely by using the MCP connectors; you’ll be asked to approve each external action.

@@ -1,20 +1,16 @@
-### What’s included
+### Step‑by‑step instructions
 
-* **AGENTS.md** – a minimal operator guide with commands to run the project locally and guardrails for future work. It links to `.cursorrules` and the Convex instructions for deeper rules.
-* **.vscode/mcp.json** – configures the Convex (stdio), GitHub (HTTP) and Vercel (HTTP) MCP servers so Copilot Chat can access them without extra setup.
-* **.github/copilot-instructions.md** – repo‑level guidance for Copilot (minimal edits, follow prompts, no secrets, respect AGENTS.md).
-* **Prompt files** under `.github/prompts` – ready‑made Copilot slash‑commands for summarising constraints (`ground-rules`), creating a GitHub repo (`init-github`), adding a build script later (`add-build-script`) and wiring up Vercel (`vercel-setup`).
+1. **Unzip your Chef export** into a project folder. The Convex docs recommend extracting the zip and renaming the folder to your app name.
+2. **Unzip this kit** (the file above) into the same project folder. It adds `AGENTS.md`, `.vscode/mcp.json`, `.github` prompts and instructions without touching your code.
+3. **Install and run locally** (recommended):
 
-### How to use it
+   * `npm install` to install all dependencies.
+   * `npx convex dev --once` to initialise a Convex dev deployment (run once).
+   * `npm run dev` to start the app and follow any login prompts.
+4. **Open VS Code**, enable Copilot Chat in Agent mode, and run **`/ground-rules`**. This reads `.cursorrules` and Convex instructions, then summarises the rules before you make changes.
+5. **Optional – Add a build script**: If `package.json` doesn’t already have `"build": "vite build"`, run **`/add-build-script`**. Some Chef exports omit the build script.
+6. **Create a repo**: Run **`/init-github`**. Copilot will use the GitHub MCP tools to create a new repository, initialise git, commit, and push. You’ll be asked for the repository name and owner.
+7. **Deploy to Vercel**: Run **`/vercel-setup`**. The prompt automatically picks the correct build command based on whether a build script exists, sets the `CONVEX_DEPLOY_KEY` environment variable, and triggers the first deployment. Have your Convex Production Deploy Key ready to paste.
+8. Once the deployment finishes, you’ll receive a live URL. You can later add a Preview deploy key for per‑branch backends if desired.
 
-1. **Download and unzip the Chef project** into a directory and rename it as desired (e.g. `MyApp`). The Chef docs advise unzipping and renaming for convenience.
-2. **Copy the contents of this kit** (extract the ZIP above) into the root of your unzipped project so it adds `AGENTS.md`, `.vscode`, and `.github` directories. These files don’t modify your app code.
-3. In your terminal, run:
-
-   * `npm install` to install dependencies.
-   * `npx convex dev --once` to initialise a Convex dev deployment (first time only).
-   * `npm run dev` to start the local development server and follow any login prompts.
-4. Read `AGENTS.md` in the project root. It outlines the quick‑start commands, guardrails and points to the detailed Convex rules. **No code changes are needed at this stage**; Chef recommends taking over development outside of Chef and warns that returning to Chef will cause conflicts.
-5. When you’re ready for the next phases (adding a build script, creating a GitHub repo, or deploying to Vercel), use Copilot Chat (Agent mode) in VS Code. Attach the appropriate prompt file (`ground‑rules`, `init‑github`, `add‑build‑script`, `vercel‑setup`) to guide Copilot through the process.
-
-This setup ensures a smooth transition from Chef to your own development environment while keeping the exported code untouched.
+With these steps, you can go from a Chef export to a running development environment and then to a production deployment, all without editing the app code.
